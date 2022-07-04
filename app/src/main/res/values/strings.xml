@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Admin BTBS</string>
+    <string-array name="BusType">
+        <item>A/C</item>
+        <item>NON A/C </item>
+    </string-array>
+    <string name="add_locality">Add locality</string>
+    <string name="locality_pin_no">locality Pin no.</string>
+    <string name="add">Add</string>
+    <string name="add_bus">Add Bus</string>
+    <string name="see_tickets">See Tickets</string>
+    <string name="bus_no">Bus No</string>
+    <string name="no_of_seats">No of seats</string>
+    <string name="ticket_price">Ticket price</string>
+    <string name="starting_time">Start Time</string>
+    <string name="arrival_time">Arrival Time</string>
+    <string name="departure_pin">Departure Pin</string>
+    <string name="arrival_pin">Arrival Pin</string>
+    <string name="starting_pin">Starting Pin</string>
+    <string name="destination_pin">Destination Pin</string>
+    <string name="runs_everyday">Runs Everyday</string>
+    <string name="specific_days">Specific Days</string>
+    <string name="confirm">Confirm</string>
+    <string name="refresh">Refresh</string>
+</resources>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@drawable/background"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/button_black"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:textStyle="italic" />
+
+    <EditText
+        android:id="@+id/addLocation"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/designwidget"
+        android:hint="@string/add_locality"
+        android:paddingStart="20dp"
+        android:paddingEnd="0dp"
+        android:textColor="#03A9F4"
+        android:textColorHint="#03A9F4"
+        android:textSize="25sp"
+        android:textStyle="italic" />
+
+    <com.santalu.maskara.widget.MaskEditText
+        android:id="@+id/addLocationPin"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/addLocation"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/designwidget"
+        android:hint="@string/locality_pin_no"
+        android:inputType="number"
+        android:paddingStart="20dp"
+        android:paddingEnd="0dp"
+        android:textColor="#03A9F4"
+        android:textColorHint="#03A9F4"
+        android:textSize="25sp"
+        android:textStyle="italic"
+        app:mask="___"
+        app:maskCharacter="_"
+        app:maskStyle="completable" />
+
+    <Button
+        android:id="@+id/btnLocation"
+        android:layout_width="210dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/addLocationPin"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_black"
+        android:text="@string/add"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/btnBus"
+        android:layout_width="210dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/btnLocation"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_black"
+        android:text="@string/add_bus"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/btnTicket"
+        android:layout_width="210dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/btnBus"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_black"
+        android:text="@string/see_tickets"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:textStyle="italic" />
+
+</RelativeLayout>

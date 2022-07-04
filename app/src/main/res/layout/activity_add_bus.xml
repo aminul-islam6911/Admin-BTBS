@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:padding="10dp"
+    tools:context=".AddBus">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/button_black"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:textStyle="italic" />
+
+    <Spinner
+        android:id="@+id/spinnerBusType"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@id/name"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/designwidget"
+        android:paddingStart="20dp"
+        android:paddingEnd="0dp"
+        android:textColor="#03A9F4"
+        android:textSize="25sp" />
+
+    <com.santalu.maskara.widget.MaskEditText
+        android:id="@+id/edtBusNo"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@id/spinnerBusType"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/designwidget"
+        android:hint="@string/bus_no"
+        android:paddingStart="20dp"
+        android:paddingEnd="0dp"
+        android:textColor="#03A9F4"
+        android:textColorHint="#03A9F4"
+        android:textSize="20sp"
+        app:mask="___-___-____"
+        app:maskCharacter="_"
+        app:maskStyle="completable" />
+
+    <com.santalu.maskara.widget.MaskEditText
+        android:id="@+id/edtNoOfSeat"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/edtBusNo"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/designwidget"
+        android:hint="@string/no_of_seats"
+        android:inputType="number"
+        android:paddingStart="20dp"
+        android:paddingEnd="0dp"
+        android:textColor="#03A9F4"
+        android:textColorHint="#03A9F4"
+        android:textSize="20sp"
+        app:mask="__"
+        app:maskCharacter="_"
+        app:maskStyle="completable" />
+
+    <com.santalu.maskara.widget.MaskEditText
+        android:id="@+id/edtTicketPrice"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/edtBusNo"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/designwidget"
+        android:hint="@string/ticket_price"
+        android:inputType="number"
+        android:paddingStart="20dp"
+        android:paddingEnd="0dp"
+        android:textColor="#03A9F4"
+        android:textColorHint="#03A9F4"
+        android:textSize="20sp"
+        app:mask="____"
+        app:maskCharacter="_"
+        app:maskStyle="completable" />
+
+    <Button
+        android:id="@+id/btnStartingTime"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@id/edtNoOfSeat"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/designwidget"
+        android:hint="@string/starting_time"
+        android:paddingStart="10dp"
+        android:paddingTop="0dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="0dp"
+        android:textColor="#03A9F4"
+        android:textColorHint="#03A9F4"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnArrivalTime"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@id/btnStartingTime"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/designwidget"
+        android:hint="@string/arrival_time"
+        android:paddingStart="10dp"
+        android:paddingTop="0dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="0dp"
+        android:textColor="#03A9F4"
+        android:textColorHint="#03A9F4"
+        android:textSize="20sp" />
+
+    <RelativeLayout
+        android:id="@+id/LocationIDS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnArrivalTime">
+
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/spStartingLocation"
+            android:layout_width="200dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/designwidget"
+            android:hint="@string/departure_pin"
+            android:inputType="number"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:textAlignment="center"
+            android:textColor="#03A9F4"
+            android:textColorHint="#03A9F4"
+            android:textSize="20sp" />
+
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/spDestinationLocation"
+            android:layout_width="200dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/spStartingLocation"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/designwidget"
+            android:hint="@string/arrival_pin"
+            android:inputType="number"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:textAlignment="center"
+            android:textColor="#03A9F4"
+            android:textColorHint="#03A9F4" />
+
+        <TextView
+            android:id="@+id/txtStartingPin"
+            android:layout_width="200dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="210dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/designwidget"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="0dp"
+            android:textAlignment="center"
+            android:textColor="#03A9F4"
+            android:textColorHint="#03A9F4"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txtDestinationPin"
+            android:layout_width="200dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/spStartingLocation"
+            android:layout_marginStart="210dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/designwidget"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="0dp"
+            android:textAlignment="center"
+            android:textColor="#03A9F4"
+            android:textColorHint="#03A9F4"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LocationIDS"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="3dp"
+        android:textColor="#03A9F4"
+        android:textColorHint="#03A9F4">
+
+        <RadioButton
+            android:id="@+id/Runs_everyday"
+            android:layout_width="170dp"
+            android:layout_height="35dp"
+            android:checked="true"
+            android:onClick="checkButton"
+            android:text="@string/runs_everyday"
+            android:textColor="#03A9F4"
+            android:textColorHint="#03A9F4"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/Runs_someday"
+            android:layout_width="170dp"
+            android:layout_height="35dp"
+            android:onClick="checkButton"
+            android:text="@string/specific_days"
+            android:textColor="#03A9F4"
+            android:textColorHint="#03A9F4"
+            android:textSize="20sp" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnAddBus"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/radioGroup"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_black"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:text="@string/confirm"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnRefresh"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/btnAddBus"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_black"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:text="@string/refresh"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+</RelativeLayout>
