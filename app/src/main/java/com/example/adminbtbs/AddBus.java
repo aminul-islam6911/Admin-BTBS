@@ -1,8 +1,5 @@
 package com.example.adminbtbs;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -20,6 +17,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.adminbtbs.Interface.IFirebaseLoadDone;
 import com.example.adminbtbs.Model.IDs;
@@ -40,7 +40,7 @@ import java.util.List;
 public class AddBus extends AppCompatActivity implements AdapterView.OnItemSelectedListener, TimePickerDialog.OnTimeSetListener, IFirebaseLoadDone, DatePickerDialog.OnDateSetListener {
     private Button btnStartingTime, btnArrivalTime, btnAddBus, btnRefresh;
     private EditText edtBusNo, edtTicketPrice, edtNoOfSeat;
-    private TextView txtName, txtStartingPin, txtDestinationPin;
+    private TextView txtName;
     private String stName, stSpecificDay, stBusType;
     private String stStartingTime, stArrivalTime, stDate;
     private DatabaseReference admin_name, locationRef, StoringData;
@@ -52,7 +52,7 @@ public class AddBus extends AppCompatActivity implements AdapterView.OnItemSelec
     int day, month, year, dayFinal, monthFinal, yearFinal;
 
     IFirebaseLoadDone iFirebaseLoadDone;
-    String stStartingPin, stDestinationPin;
+    String stStartingLoc, stDestinationLoc;
     List<IDs> iDs;
     RadioGroup radioGroup;
     RadioButton radioButton;
@@ -71,8 +71,6 @@ public class AddBus extends AppCompatActivity implements AdapterView.OnItemSelec
         btnRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtStartingPin.setText("");
-                txtDestinationPin.setText("");
                 edtBusNo.setText("");
                 btnStartingTime.setText("Starting Time");
                 btnArrivalTime.setText("Arrival Time");
@@ -93,10 +91,6 @@ public class AddBus extends AppCompatActivity implements AdapterView.OnItemSelec
         edtBusNo = findViewById(R.id.edtBusNo);
         edtTicketPrice = findViewById(R.id.edtTicketPrice);
         edtNoOfSeat = findViewById(R.id.edtNoOfSeat);
-
-        //TextView
-        txtDestinationPin = findViewById(R.id.txtDestinationPin);
-        txtStartingPin = findViewById(R.id.txtStartingPin);
 
         //Searchable spinner
         spStartingLocation = findViewById(R.id.spStartingLocation);
@@ -161,7 +155,7 @@ public class AddBus extends AppCompatActivity implements AdapterView.OnItemSelec
     }
 
     private void FirebaseDataRetrieve() {
-        locationRef = FirebaseDatabase.getInstance().getReference("Location");
+        locationRef = FirebaseDatabase.getInstance().getReference("Locations");
         iFirebaseLoadDone = this;
         locationRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -185,8 +179,7 @@ public class AddBus extends AppCompatActivity implements AdapterView.OnItemSelec
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 IDs iD = iDs.get(position);
-                stStartingPin = iD.getLocation_pin();
-                txtStartingPin.setText(stStartingPin);
+                stStartingLoc = iD.getPlace();
             }
 
             @Override
@@ -199,8 +192,7 @@ public class AddBus extends AppCompatActivity implements AdapterView.OnItemSelec
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 IDs iD = iDs.get(position);
-                stDestinationPin = iD.getLocation_pin();
-                txtDestinationPin.setText(stDestinationPin);
+                stDestinationLoc = iD.getPlace();
             }
 
             @Override
@@ -216,15 +208,15 @@ public class AddBus extends AppCompatActivity implements AdapterView.OnItemSelec
             public void onClick(View v) {
                 busAc_NonAc();
                 String dbBusNo = edtBusNo.getText().toString();
-                String dbStartingPin = txtStartingPin.getText().toString();
-                String dbDestinationPin = txtDestinationPin.getText().toString();
-                String NoOfSeats = edtNoOfSeat.getText().toString();
+                String dbNoOfSeats = edtNoOfSeat.getText().toString();
+                String Ticket_price = edtTicketPrice.getText().toString();
 
-                if (!dbStartingPin.equals(dbDestinationPin)) {
-                    if (!stBusType.isEmpty() && !dbBusNo.isEmpty() && !dbStartingPin.isEmpty()
-                            && !dbDestinationPin.isEmpty() && !stStartingTime.isEmpty() && !stArrivalTime.isEmpty() && !NoOfSeats.isEmpty()) {
+                if (!stStartingLoc.equals(stDestinationLoc)) {
+                    if (!stBusType.isEmpty() && !dbBusNo.isEmpty() && !stStartingLoc.isEmpty()
+                            && !stDestinationLoc.isEmpty() && !stStartingTime.isEmpty()
+                            && !stArrivalTime.isEmpty() && !dbNoOfSeats.isEmpty() && !Ticket_price.isEmpty()) {
                         sendingData.show();
-                        SendBusData(stBusType, dbBusNo, dbStartingPin, dbDestinationPin, stStartingTime, stArrivalTime, stDate, NoOfSeats);
+                        SendBusData(stBusType, dbBusNo, stStartingLoc, stDestinationLoc, stStartingTime, stArrivalTime, stDate, dbNoOfSeats, Ticket_price);
                     } else {
                         Toast.makeText(AddBus.this, "Please fill each box", Toast.LENGTH_SHORT).show();
                     }
@@ -235,23 +227,22 @@ public class AddBus extends AppCompatActivity implements AdapterView.OnItemSelec
         });
     }
 
-    private void SendBusData(String stBusType, String dbBusNo,
-                             String dbStartingPin, String dbDestinationPin,
-                             String stStartingTime, String stArrivalTime, String stDate, String NoOfSeats) {
-        String DateId = (stDate + " " + dbStartingPin + dbDestinationPin);
+    private void SendBusData(String BusType, String BusNo,
+                             String StartingLoc, String DestinationLoc,
+                             String StartingTime, String ArrivalTime, String Date, String NoOfSeats, String Price) {
+        String DateId = (stDate + " " + stStartingLoc + " " + stDestinationLoc);
         StoringData = FirebaseDatabase.getInstance().getReference().
-                child("Buses").child(DateId).child(dbBusNo);
-        String Ticket_price = edtTicketPrice.getText().toString();
+                child("Buses").child(DateId).child(BusNo);
         HashMap<String, String> loc = new HashMap<>();
-        loc.put("StartingPin", dbStartingPin);
-        loc.put("DestinationPin", dbDestinationPin);
+        loc.put("Start", stStartingLoc);
+        loc.put("Destination", stDestinationLoc);
         loc.put("StartingTime", stStartingTime);
         loc.put("ArrivalTime", stArrivalTime);
         loc.put("Date", stDate);
         loc.put("BusType", stBusType.toLowerCase());//Converting text to lower case
-        loc.put("BusNo", dbBusNo);
+        loc.put("BusNo", BusNo);
         loc.put("NumberOfSeat", NoOfSeats);
-        loc.put("TicketPrice", Ticket_price);
+        loc.put("TicketPrice", Price);
         StoringData.setValue(loc).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

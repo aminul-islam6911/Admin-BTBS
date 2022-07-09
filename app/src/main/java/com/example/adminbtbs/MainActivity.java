@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView adminName;
     private Button btnLocation, btnAddBus, btnTickets;
     private ProgressDialog progressDialog, progressLocation;
-    private String Name, Location, PinCode;
+    private String Name, Location;
     private DatabaseReference databaseAddress;
-    private EditText edtLocation,edtPinNo;
+    private EditText edtLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         adminName = findViewById(R.id.name);
         //EditText
         edtLocation = findViewById(R.id.addLocation);
-        edtPinNo = findViewById(R.id.addLocationPin);
 
         //Button
         btnLocation = findViewById(R.id.btnLocation);
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         btnTickets = findViewById(R.id.btnTicket);
 
         DatabaseReference databaseName = FirebaseDatabase.getInstance().getReference().child("Admin");
-        databaseAddress = FirebaseDatabase.getInstance().getReference().child("Location");
+        databaseAddress = FirebaseDatabase.getInstance().getReference().child("Locations");
 
         databaseName.addValueEventListener(new ValueEventListener() {
             @Override
@@ -97,13 +96,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Location = edtLocation.getText().toString();
-                PinCode = edtPinNo.getText().toString();
-                if(!Location.isEmpty() && !PinCode.isEmpty())
+                if(!Location.isEmpty())
                 {
                     progressLocation.setTitle("Registering");
                     progressLocation.setCancelable(false);
                     progressLocation.show();
-                    SetLocation(Location,PinCode);
+                    SetLocation(Location);
                 }else
                 {
                     Toast.makeText(MainActivity.this,"Please fill each box",Toast.LENGTH_SHORT).show();
@@ -112,10 +110,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void SetLocation(String Location,String PinCode){
-        databaseAddress = FirebaseDatabase.getInstance().getReference().child("Location").child(PinCode);
+    private void SetLocation(String Location){
+        databaseAddress = FirebaseDatabase.getInstance().getReference().child("Locations").child(Location);
         HashMap<String, String> loc = new HashMap<>();
-        loc.put("Location_pin",PinCode);
         loc.put("Place",Location.toUpperCase());
         databaseAddress.setValue(loc).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -133,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void removeEdt(){
-        edtPinNo.setText("");
         edtLocation.setText("");
     }
 }
