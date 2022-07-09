@@ -11,7 +11,6 @@ public class IDs {
     public String getLocation_pin() {
         return Location_pin;
     }
-
     public void setLocation_pin(String Location_pin) {
         this.Location_pin = Location_pin;
     }
@@ -21,5 +20,4 @@ public class IDs {
     public void setPlace(String Place) {
         this.Place = Place;
     }
-
 }
