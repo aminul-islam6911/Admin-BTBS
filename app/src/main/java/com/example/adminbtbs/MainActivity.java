@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         progressDialog = new ProgressDialog(this);
         progressLocation = new ProgressDialog(this);
 
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.show();
     }
 
-    private void Initialize(){
+    private void Initialize() {
         adminName = findViewById(R.id.name);
         //EditText
         edtLocation = findViewById(R.id.addLocation);
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 Name = dataSnapshot.child("Name").getValue().toString();
                 adminName.setText(Name);
                 progressDialog.dismiss();
-                Toast.makeText(MainActivity.this,Name,Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, Name, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -74,12 +75,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void Buttons(){
+    private void Buttons() {
         btnAddBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 removeEdt();
-                Intent in = new Intent(MainActivity.this,AddBus.class);
+                Intent in = new Intent(MainActivity.this, AddBus.class);
                 startActivity(in);
             }
         });
@@ -87,49 +88,47 @@ public class MainActivity extends AppCompatActivity {
         btnTickets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(MainActivity.this,AdminTickets.class);
+                Intent in = new Intent(MainActivity.this, AdminTickets.class);
                 startActivity(in);
             }
         });
-        
+
         btnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Location = edtLocation.getText().toString();
-                if(!Location.isEmpty())
-                {
+                if (!Location.isEmpty()) {
                     progressLocation.setTitle("Registering");
                     progressLocation.setCancelable(false);
                     progressLocation.show();
                     SetLocation(Location);
-                }else
-                {
-                    Toast.makeText(MainActivity.this,"Please fill each box",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Please fill each box", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    private void SetLocation(String Location){
+    private void SetLocation(String Location) {
         databaseAddress = FirebaseDatabase.getInstance().getReference().child("Locations").child(Location);
         HashMap<String, String> loc = new HashMap<>();
-        loc.put("Place",Location.toUpperCase());
+        loc.put("Place", Location.toUpperCase());
         databaseAddress.setValue(loc).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete( Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(MainActivity.this,"Location Updated in database",Toast.LENGTH_SHORT).show();
+            public void onComplete(Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "Location Updated in database", Toast.LENGTH_SHORT).show();
                     progressLocation.dismiss();
                     removeEdt();
-                }else {
-                    Toast.makeText(MainActivity.this,"Location not updated ",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Location not updated ", Toast.LENGTH_SHORT).show();
                     progressLocation.dismiss();
                 }
             }
         });
     }
 
-    private void removeEdt(){
+    private void removeEdt() {
         edtLocation.setText("");
     }
 }

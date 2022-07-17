@@ -3,9 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Doc/AndroidStudioProjects/Admin-BTBS/app/src/main/res/drawable/designwidget.xml" value="0.246" />
         <entry key="..\:/Doc/AndroidStudioProjects/Admin-BTBS/app/src/main/res/layout/activity_add_bus.xml" value="0.5333333333333333" />
         <entry key="..\:/Doc/AndroidStudioProjects/Admin-BTBS/app/src/main/res/layout/activity_admin_tickets.xml" value="0.3651041666666667" />
-        <entry key="..\:/Doc/AndroidStudioProjects/Admin-BTBS/app/src/main/res/layout/activity_main.xml" value="0.3651041666666667" />
+        <entry key="..\:/Doc/AndroidStudioProjects/Admin-BTBS/app/src/main/res/layout/activity_main.xml" value="0.54765625" />
         <entry key="..\:/Doc/AndroidStudioProjects/AdminBTBS/app/src/main/res/drawable/back.xml" value="0.231" />
         <entry key="..\:/Doc/AndroidStudioProjects/AdminBTBS/app/src/main/res/layout/activity_add_bus.xml" value="0.54765625" />
         <entry key="..\:/Doc/AndroidStudioProjects/AdminBTBS/app/src/main/res/layout/activity_admin_tickets.xml" value="0.3651041666666667" />
