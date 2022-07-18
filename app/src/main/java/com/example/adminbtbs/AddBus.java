@@ -275,6 +275,7 @@ public class AddBus extends AppCompatActivity implements AdapterView.OnItemSelec
             year = c.get(Calendar.YEAR);
             DatePickerDialog datePickerDialog = new DatePickerDialog(AddBus.this, AddBus.this,
                     year, month, day);
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() -1000);
             datePickerDialog.show();
         }
     }
